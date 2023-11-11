@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { Message, PermissionResolvable } from "discord.js";
 import { readdir } from "fs/promises";
 import { join } from "path";
 import { RavenClient } from "../lib/client";
@@ -9,13 +9,16 @@ export interface ICommand {
     name: string;
     description: string;
     su?: boolean;
+    requiredPermissions?: PermissionResolvable[];
     handler: CommandCallback | Subcommand[];
 }
+
 
 export class Command implements ICommand {
     public name: string;
     public description: string;
     public su?: boolean;
+    public requiredPermissions?: PermissionResolvable[];
     public handler: CommandCallback | Subcommand[];
 
     constructor(co: ICommand) {

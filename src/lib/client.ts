@@ -1,4 +1,5 @@
 import { User, Guild, TextChannel, ColorResolvable, Client, ClientOptions } from "discord.js";
+import { PrismaClient } from "@prisma/client";
 import { resolveActivityType } from "./utils";
 
 export interface Config {
@@ -33,8 +34,9 @@ interface RavenClientOptions extends ClientOptions {
 
 export class RavenClient extends Client {
     config: Config;
+    prisma: PrismaClient;
     palette: Record<string, ColorResolvable> = {
-        accent: "#00B9B9",
+        info: "#00B9B9",
         error: "#BD4879",
         warn: "#FFC076",
         success: "#90C2A4",
@@ -55,5 +57,8 @@ export class RavenClient extends Client {
     public constructor(co: RavenClientOptions) {
         super(co);
         this.config = co.config;
+        this.prisma = new PrismaClient();
+
+        process.on("exit", this.prisma.$disconnect);
     };
 }

@@ -4,7 +4,7 @@ import { commands } from "./command";
 
 export default async function setupMessageHandler(client: RavenClient) {
     client.on("messageCreate", async (message) => {
-        if (message.author.bot || !message.content.startsWith(client.config.prefix)) return;
+        if (message.author.bot || !message.member || message.guildId !== client.config.guild || !message.content.startsWith(client.config.prefix)) return;
 
         const args = message.content.slice(client.config.prefix.length).trim().split(/ +/);
         const commandName = args.shift()!.toLowerCase();
@@ -14,6 +14,11 @@ export default async function setupMessageHandler(client: RavenClient) {
 
         if (command.su && !client.config.superusers.includes(message.author.id)) {
             message.reply({ embeds: [createStatusEmbed("error", `${message.author.username} is not in the sudoers file. This incident will be reported.`)] });
+            return;
+        }
+
+        if (command.requiredPermissions && !message.member.permissions.has(command.requiredPermissions)) {
+            message.reply({ embeds: [createStatusEmbed("error", `You do not have permission to use this command.`)] });
             return;
         }
 

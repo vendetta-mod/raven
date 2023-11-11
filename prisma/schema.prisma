@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+enum CaseType {
+    WARN
+    MUTE
+    UNMUTE
+    KICK
+    BAN
+    UNBAN
+}
+
+model Case {
+    id          Int      @id @default(autoincrement())
+    type        CaseType
+    reason      String @default("No reason provided")
+    moderatorId String
+    userId      String
+    createdAt   DateTime @default(now())
+    expiresAt   DateTime?
+}
