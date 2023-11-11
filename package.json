@@ -1,0 +1,37 @@
+{
+    "name": "raven",
+    "description": "Friendly bot for the Vendetta Discord server.",
+    "version": "1.0.0",
+    "main": "dist/index.js",
+    "scripts": {
+        "start": "node .",
+        "build": "rimraf dist && tsc",
+        "dev": "rimraf dist && tsc-watch --onSuccess \"npm run start\""
+    },
+    "author": "maisymoe",
+    "license": "BSD-3-Clause",
+    "repository": "https://github.com/vendetta-mod/raven",
+    "dependencies": {
+        "bufferutil": "^4.0.8",
+        "discord.js": "^14.13.0",
+        "erlpack": "github:discord/erlpack",
+        "utf-8-validate": "^6.0.3",
+        "valtio": "^1.12.0",
+        "zlib-sync": "^0.1.9"
+    },
+    "devDependencies": {
+        "@types/node": "^20.9.0",
+        "rimraf": "^5.0.5",
+        "tsc-watch": "^6.0.4",
+        "type-fest": "^4.7.1",
+        "typescript": "^5.2.2"
+    },
+    "pnpm": {
+        "peerDependencyRules": {
+            "ignoreMissing": [
+                "react",
+                "react-dom"
+            ]
+        }
+    }
+}

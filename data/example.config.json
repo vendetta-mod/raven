@@ -1,0 +1,13 @@
+{
+    "token": "bot-token-here",
+    "prefix": "r.",
+    "superusers": ["user-id-here"],
+    "guild": "guild-id-here",
+    "channels": {
+        "log": "channel-id-here"
+    },
+    "activity": {
+        "name": "I hope you explode",
+        "type": "custom"
+    }
+}
