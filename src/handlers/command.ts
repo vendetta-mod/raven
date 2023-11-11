@@ -3,7 +3,7 @@ import { readdir } from "fs/promises";
 import { join } from "path";
 import { RavenClient } from "../lib/client";
 
-export type CommandCallback = (client: RavenClient, args: string[], message: Message) => Promise<void>;
+export type CommandCallback = (client: RavenClient, args: string[], message: Message) => Promise<void | any>;
 
 export interface ICommand {
     name: string;
@@ -12,7 +12,6 @@ export interface ICommand {
     requiredPermissions?: PermissionResolvable[];
     handler: CommandCallback | Subcommand[];
 }
-
 
 export class Command implements ICommand {
     public name: string;
@@ -25,6 +24,7 @@ export class Command implements ICommand {
         this.name = co.name;
         this.description = co.description;
         this.su = co.su;
+        this.requiredPermissions = co.requiredPermissions;
         this.handler = co.handler;
     }
 }

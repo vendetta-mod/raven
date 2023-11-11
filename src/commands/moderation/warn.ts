@@ -7,10 +7,7 @@ export default new Command({
     requiredPermissions: ["ModerateMembers"],
     handler: async (client, args, message) => {
         const user = message.mentions.users.first() ?? await client.users.fetch(args[0]);
-        if (!user) {
-            message.reply({ embeds: [createStatusEmbed("error", "Couldn't resolve that user!")] });
-            return;
-        }
+        if (!user) message.reply({ embeds: [createStatusEmbed("error", "Couldn't resolve that user!")] });
 
         const reason: string = args.length > 1 ? args.slice(1).join(" ") : "No reason provided";
         

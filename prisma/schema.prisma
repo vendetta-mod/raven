@@ -13,7 +13,6 @@ datasource db {
 enum CaseType {
     WARN
     MUTE
-    UNMUTE
     KICK
     BAN
     UNBAN
@@ -26,5 +25,4 @@ model Case {
     moderatorId String
     userId      String
     createdAt   DateTime @default(now())
-    expiresAt   DateTime?
 }

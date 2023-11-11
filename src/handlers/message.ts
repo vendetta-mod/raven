@@ -18,7 +18,7 @@ export default async function setupMessageHandler(client: RavenClient) {
         }
 
         if (command.requiredPermissions && !message.member.permissions.has(command.requiredPermissions)) {
-            message.reply({ embeds: [createStatusEmbed("error", `You do not have permission to use this command.`)] });
+            message.reply({ embeds: [createStatusEmbed("error", "You do not have permission to use this command.")] });
             return;
         }
 
