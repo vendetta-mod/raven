@@ -58,6 +58,7 @@ export class RavenClient extends Client {
         super(co);
         this.config = co.config;
         this.prisma = new PrismaClient();
+        this.prisma.$connect();
 
         process.on("exit", this.prisma.$disconnect);
     };
