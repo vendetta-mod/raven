@@ -1,10 +1,10 @@
-import { Command } from "../../handlers/command";
-import { createCaseEmbed, createStatusEmbed } from "../../lib/embeds";
+import { Subcommand } from "../../../handlers/command";
+import { createStatusEmbed } from "../../../lib/common";
+import { createCaseEmbed } from "../../../lib/moderation";
 
-export default new Command({
-    name: "case",
+export default new Subcommand({
+    name: "info",
     description: "Get info on a moderation case.",
-    requiredPermissions: ["ModerateMembers"],
     handler: async (client, args, message) => {
         const caseId = parseInt(args[0]);
         if (!caseId || isNaN(caseId)) return message.reply({ embeds: [createStatusEmbed("error", "Invalid case ID!")] });

@@ -1,7 +1,7 @@
 import { codeBlock, cleanCodeBlockContent } from "discord.js";
 import { inspect } from "util";
 import { Command } from "../../handlers/command";
-import { createStatusEmbed } from "../../lib/embeds";
+import { createStatusEmbed } from "../../lib/common";
 
 const AsyncFunction = (async function () {}).constructor;
 

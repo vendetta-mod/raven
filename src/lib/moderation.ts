@@ -1,13 +1,7 @@
-import { EmbedBuilder, EmbedData, resolveColor } from "discord.js";
-import { Case } from "@prisma/client";
+import { Snowflake } from "discord.js";
+import { Case, CaseType } from "@prisma/client";
+import { createStatusEmbed } from "./common";
 import { client } from "..";
-
-type StatusEmbedType = "info" | "success" | "warn" | "error";
-
-export function createStatusEmbed(type: StatusEmbedType, data: string | EmbedData) {
-    const baseEmbedData: EmbedData = { color: resolveColor(client.palette[type]) };
-    return new EmbedBuilder({ ...baseEmbedData, ...(typeof data === "string" ? { description: data } : data) });
-}
 
 export async function createCaseEmbed(modCase: Case) {
     const moderator = await client.users.fetch(modCase.moderatorId);
@@ -22,4 +16,18 @@ export async function createCaseEmbed(modCase: Case) {
         footer: { text: `Case ${modCase.id}` },
         timestamp: modCase.createdAt,
     });
+}
+
+enum PrettyCaseTypes {
+    WARN = "warned",
+    MUTE = "muted",
+    KICK = "kicked",
+    BAN = "banned",
+    UNBAN = "unbanned",
+}
+
+export async function createModerationEmbed(modCase: Case) {
+    const user = await client.users.fetch(modCase.userId);
+
+    return createStatusEmbed("success", `Created case ${modCase.id} - ${user} has been ${PrettyCaseTypes[modCase.type]}.`);
 }

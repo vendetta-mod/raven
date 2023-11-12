@@ -1,6 +1,6 @@
 import { User, Guild, TextChannel, ColorResolvable, Client, ClientOptions } from "discord.js";
 import { PrismaClient } from "@prisma/client";
-import { resolveActivityType } from "./utils";
+import { resolveActivityType } from "./common";
 
 export interface Config {
     token: string;

@@ -1,5 +1,5 @@
 import { RavenClient } from "../lib/client";
-import { createStatusEmbed } from "../lib/embeds";
+import { createStatusEmbed } from "../lib/common";
 import { commands } from "./command";
 
 export default async function setupMessageHandler(client: RavenClient) {

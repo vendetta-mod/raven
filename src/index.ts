@@ -1,7 +1,7 @@
 import { GatewayIntentBits } from "discord.js";
 import { RavenClient } from "./lib/client";
 import { setupDataLink } from "./lib/data";
-import { setupActivityLoop } from "./lib/utils";
+import { setupActivityLoop } from "./lib/common";
 
 import setupCommandHandler from "./handlers/command";
 import setupMessageHandler from "./handlers/message";

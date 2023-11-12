@@ -1,5 +1,6 @@
-import { ActivityType } from "discord.js";
+import { ActivityType, EmbedBuilder, EmbedData, resolveColor } from "discord.js";
 import { RavenClient } from "./client";
+import { client } from "..";
 
 export function resolveActivityType(type: ActivityTypeResolvable) {
     if (typeof type === "string") {
@@ -29,4 +30,19 @@ export async function setupActivityLoop(client: RavenClient) {
     const constants = await client.getConstants();
     client.user?.setActivity(constants.activity);
     setInterval(() => client.user?.setActivity(constants.activity), 900000);
+}
+
+export function createStatusEmbed(type: StatusEmbedType, data: string | EmbedData) {
+    const baseEmbedData: EmbedData = { color: resolveColor(client.palette[type]) };
+    return new EmbedBuilder({ ...baseEmbedData, ...(typeof data === "string" ? { description: data } : data) });
+}
+
+export const isSnowflake = (id: string): boolean => {
+    try {
+        BigInt(id).toString();
+    } catch {
+        return false;
+    }
+
+    return true;
 }
